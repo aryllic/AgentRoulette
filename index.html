@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Strat Roulette</title>
+    <link rel="stylesheet" href="./style.css">
+    <script src="./index.js"></script>
+</head>
+<body onload="loaded();">
+    <div class="content-container">
+        <header class="header" id="header">
+            <div class="title">
+                Strat Roulette
+            </div>
+        </header>
+        <div class="main-content">
+            <div class="frage">
+                Strat Roulette
+            </div>
+
+            <div class="content">
+                Possible Players:
+
+                <div class="content-text" id="possible-players">
+                    
+                </div>
+            </div>
+
+            <div class="content">
+                Players:
+
+                <div class="content-text">
+                    (Separate them with a comma and a space. [, ])
+                    
+                    <form id="players-form">
+                        <input type="text" id="players">
+                    </form>
+                </div>
+            </div>
+
+            <div class="content">
+                <button id="roulette-button">Roulette!</button>
+
+                <div class="content-text" id="roulette-output">
+                    
+                </div>
+            </div>
+        </div>
+        <footer class="footer">
+            &copy;Strat Roulette | julixq bad
+        </footer>
+        <div class="bg">
+            <div class="bg-img1">
+                <img src="./bg.png" alt="">
+            </div>
+        </div>
+    </div>
+    <button class="scroll-button" id="scroll-button" hidden>
+        ^
+    </button>
+</body>
+</html>
