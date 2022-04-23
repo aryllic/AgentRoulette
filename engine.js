@@ -6,7 +6,7 @@ const profiles = [
     agents: ["brimstone", "phoenix", "sage", "sova", "viper", "cypher", "reyna", "killjoy", "breach", "omen", "jett", "raze", "skye", "yoru", "astra", "kay/o", "chamber", "neon"]
   },
   {
-    name: "franzi",
+    name: "lulimu",
     agents: ["brimstone", "phoenix", "sage", "sova", "viper", "cypher", "reyna", "killjoy", "breach", "omen", "jett", "raze", "skye", "yoru", "astra", "kay/o", "chamber", "neon"]
   },
   {
