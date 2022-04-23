@@ -2,23 +2,123 @@ let players = [];
 
 const profiles = [
   {
-    name: "markus",
-    agents: ["raze", "reyna", "brimstone"]
+    name: "julixq",
+    agents: ["brimstone", "phoenix", "sage", "sova", "viper", "cypher", "reyna", "killjoy", "breach", "omen", "jett", "raze", "skye", "yoru", "astra", "kay/o", "chamber", "neon"]
+  },
+  {
+    name: "mullug",
+    agents: ["brimstone", "phoenix", "sage", "sova", "jett", "raze"]
+  },
+  {
+    name: "domidick",
+    agents: ["brimstone", "phoenix", "sage", "sova", "viper", "cypher", "reyna", "killjoy", "breach", "omen", "jett", "raze", "skye", "yoru", "astra", "kay/o", "chamber", "neon"]
   },
   {
     name: "qtynz",
-    agents: ["reyna", "neon", "jett"]
+    agents: ["brimstone", "phoenix", "sage", "sova", "viper", "reyna", "omen", "jett", "raze", "skye", "yoru", "kay/o", "chamber", "neon"]
+  },
+  {
+    name: "mapri",
+    agents: ["brimstone", "phoenix", "sage", "sova", "cypher", "reyna", "omen", "jett", "raze", "skye", "yoru", "astra", "neon"]
+  },
+  {
+    name: "mxty",
+    agents: ["brimstone", "phoenix", "sage", "sova", "viper", "cypher", "reyna", "killjoy", "breach", "omen", "jett", "raze", "skye", "yoru", "astra", "kay/o", "chamber", "neon"]
+  },
+  {
+    name: "arakatze",
+    agents: ["brimstone", "phoenix", "sage", "sova", "omen", "jett", "raze", "yoru", "neon"]
+  },
+  {
+    name: "ela",
+    agents: ["brimstone", "phoenix", "sage", "sova", "viper", "cypher", "reyna", "killjoy", "breach", "omen", "jett", "raze", "skye", "yoru", "astra", "kay/o", "chamber", "neon"]
+  },
+  {
+    name: "happy",
+    agents: ["brimstone", "phoenix", "sage", "sova", "viper", "cypher", "reyna", "killjoy", "omen", "jett", "skye", "yoru", "astra", "kay/o", "chamber"]
+  },
+  {
+    name: "ola",
+    agents: ["brimstone", "phoenix", "sage", "sova", "viper", "cypher", "reyna", "killjoy", "breach", "omen", "jett", "raze", "skye", "yoru", "astra", "kay/o", "chamber", "neon"]
+  },
+  {
+    name: "aryllic",
+    agents: ["brimstone", "phoenix", "sage", "sova", "viper", "cypher", "jett"]
   }
 ];
 
-const strats = [
+const agents = [
   {
-    aufgabe: "eine aufgabe",
-    requiredAgent: ""
+    agent: "Brimstone",
+    requiredAgent: "brimstone"
   },
   {
-    aufgabe: "eine aufgabe, die raze benötigt",
+    agent: "Phoenix",
+    requiredAgent: "phoenix"
+  },
+  {
+    agent: "Sage",
+    requiredAgent: "sage"
+  },
+  {
+    agent: "Sova",
+    requiredAgent: "sova"
+  },
+  {
+    agent: "Viper",
+    requiredAgent: "viper"
+  },
+  {
+    agent: "Cypher",
+    requiredAgent: "cypher"
+  },
+  {
+    agent: "Reyna",
+    requiredAgent: "reyna"
+  },
+  {
+    agent: "Killjoy",
+    requiredAgent: "killjoy"
+  },
+  {
+    agent: "Breach",
+    requiredAgent: "breach"
+  },
+  {
+    agent: "Omen",
+    requiredAgent: "omen"
+  },
+  {
+    agent: "Jett",
+    requiredAgent: "jett"
+  },
+  {
+    agent: "Raze",
     requiredAgent: "raze"
+  },
+  {
+    agent: "Skye",
+    requiredAgent: "skye"
+  },
+  {
+    agent: "Yoru",
+    requiredAgent: "yoru"
+  },
+  {
+    agent: "Astra",
+    requiredAgent: "astra"
+  },
+  {
+    agent: "Kay/O",
+    requiredAgent: "kay/o"
+  },
+  {
+    agent: "Chamber",
+    requiredAgent: "chamber"
+  },
+  {
+    agent: "Neon",
+    requiredAgent: "neon"
   }
 ];
 
@@ -51,38 +151,34 @@ function chooseProfile() {
   return chosenProfile;
 };
 
-function chooseStrat() {
-  let index = round(Math.random() * strats.length);
+function chooseAgent() {
+  let index = round(Math.random() * agents.length);
 
-  if (index >= strats.length) {
+  if (index >= agents.length) {
     index--;
   };
 
-  const chosenStrat = strats[index];
+  const chosenAgent = agents[index];
 
-  return chosenStrat;
+  return chosenAgent;
 };
 
-function roulette(profile, strat, repeatedTimes) {
+function roulette(chosenProfile, chosenAgent, triedAgents, repeatedTimes) {
   if (repeatedTimes < 5000) {
-    if (strat.requiredAgent != "") {
-      try {
-        profile.agents.forEach(agent => {
-          if (agent == strat.requiredAgent) {
-            throw strat;
-          };
-        });
-      } catch (strat) {
-        return strat
-      };
-
-      return roulette(profile, strat, repeatedTimes + 1);
-    } else {
-      return strat;
+    try {
+      chosenProfile.agents.forEach(agent => {
+        if (agent == chosenAgent.requiredAgent) {
+          throw chosenAgent;
+        };
+      });
+    } catch (chosenAgent) {
+      return chosenAgent
     };
+
+    return roulette(chosenProfile, chooseAgent(), triedAgents, repeatedTimes + 1);
   } else {
     return {
-      aufgabe: "Konnte keine Aufgabe finden!",
+      agent: "Konnte keinen Agenten finden!",
       requiredAgent: ""
     };
   };
@@ -97,6 +193,7 @@ function loaded() {
   const rouletteButton = document.getElementById("roulette-button");
   const rouletteOutput = document.getElementById("roulette-output");
   const possiblePlayers = document.getElementById("possible-players");
+  const playersDisplay = document.getElementById("players-display");
 
   let possiblePlayersString = "";
 
@@ -176,11 +273,11 @@ function loaded() {
 
   function startRoulette() {
     if (players.length > 0) {
-      const profile = chooseProfile();
-      const strat = chooseStrat();
-      const aufgabe = roulette(profile, strat, 0).aufgabe;
+      const chosenProfile = chooseProfile();
+      const chosenAgent = chooseAgent();
+      const agentString = roulette(chosenProfile, chosenAgent, [], 0).agent;
 
-      rouletteOutput.innerText = profile.name + ": " + aufgabe;
+      rouletteOutput.innerText = chosenProfile.name + ": " + agentString;
     };
   };
 
@@ -194,11 +291,37 @@ function loaded() {
   rouletteForm.addEventListener("submit", function(event) {
     event.preventDefault();
     
-    if (rouletteForm.players.value != "") {
-      players = rouletteForm.players.value.split(", ");
+    if (rouletteForm.players.value.split(", ").length > 0 && rouletteForm.players.value != "") {
+      rouletteForm.players.value.split(", ").forEach(player => {
+        profiles.forEach(profile => {
+          if (profile.name == player) {
+            if (players.length > 0) {
+              let foundPlayer = false;
+    
+              players.forEach(arrayPlayer => {
+                if (arrayPlayer == player) {
+                  foundPlayer = true;
+                };
+              });
+    
+              if (!foundPlayer) {
+                players.push(player);
+              };
+
+              playersDisplay.innerText = "Players playing: " + players.join(", ");
+            } else {
+              players.push(player);
+
+              playersDisplay.innerText = "Players playing: " + players.join(", ");
+            };
+          };
+        });
+      });
+
       rouletteForm.players.value = "";
     } else {
       players = [];
+      playersDisplay.innerText = "Players playing: No players!";
     };
   });
 };
